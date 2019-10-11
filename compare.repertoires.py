@@ -191,7 +191,7 @@ file_TCRA_1=args.dir_1+"/TCRA.VJ.FREQ."+".csv"
 file_TCRA_2=args.dir_2+"/TCRA.VJ.FREQ."+".csv"
 
 file_TCRB_1=args.dir_1+"/TCRB.VJ.FREQ."+".csv"
-file_TCRB_2=args.dir_2+"/TCRB.VJ.FREQ."+sample_2+".csv"
+file_TCRB_2=args.dir_2+"/TCRB.VJ.FREQ."+".csv"
 
 file_TCRD_1=args.dir_1+"/TCRD.VJ.FREQ."+".csv"
 file_TCRD_2=args.dir_2+"/TCRD.VJ.FREQ."+".csv"
