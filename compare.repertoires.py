@@ -57,6 +57,7 @@ def file2dict(fileName):
     dict={}
     file=open(fileName,"r")
     reader=csv.reader(file)
+    next(reader)# skip the headline
     for row in reader:
         dict[row[0]]=int(row[1])
     return dict
@@ -84,27 +85,27 @@ else:
 
 print ("-----")
 print (sample_1,sample_2)
+# remove "+ sample_1" or "+ sample_2" from the following lines
+file_IGH_1=args.dir_1+"/IGH.cdr3.FREQ."+".csv"
+file_IGH_2=args.dir_2+"/IGH.cdr3.FREQ."+".csv"
 
-file_IGH_1=args.dir_1+"/IGH.cdr3.FREQ."+sample_1+".csv"
-file_IGH_2=args.dir_2+"/IGH.cdr3.FREQ."+sample_2+".csv"
+file_IGK_1=args.dir_1+"/IGK.cdr3.FREQ."+".csv"
+file_IGK_2=args.dir_2+"/IGK.cdr3.FREQ."+".csv"
 
-file_IGK_1=args.dir_1+"/IGK.cdr3.FREQ."+sample_1+".csv"
-file_IGK_2=args.dir_2+"/IGK.cdr3.FREQ."+sample_2+".csv"
+file_IGL_1=args.dir_1+"/IGL.cdr3.FREQ."+".csv"
+file_IGL_2=args.dir_2+"/IGL.cdr3.FREQ."+".csv"
 
-file_IGL_1=args.dir_1+"/IGL.cdr3.FREQ."+sample_1+".csv"
-file_IGL_2=args.dir_2+"/IGL.cdr3.FREQ."+sample_2+".csv"
+file_TCRA_1=args.dir_1+"/TCRA.cdr3.FREQ."+".csv"
+file_TCRA_2=args.dir_2+"/TCRA.cdr3.FREQ."+".csv"
 
-file_TCRA_1=args.dir_1+"/TCRA.cdr3.FREQ."+sample_1+".csv"
-file_TCRA_2=args.dir_2+"/TCRA.cdr3.FREQ."+sample_2+".csv"
+file_TCRB_1=args.dir_1+"/TCRB.cdr3.FREQ."+".csv"
+file_TCRB_2=args.dir_2+"/TCRB.cdr3.FREQ."+".csv"
 
-file_TCRB_1=args.dir_1+"/TCRB.cdr3.FREQ."+sample_1+".csv"
-file_TCRB_2=args.dir_2+"/TCRB.cdr3.FREQ."+sample_2+".csv"
+file_TCRD_1=args.dir_1+"/TCRD.cdr3.FREQ."+".csv"
+file_TCRD_2=args.dir_2+"/TCRD.cdr3.FREQ."+".csv"
 
-file_TCRD_1=args.dir_1+"/TCRD.cdr3.FREQ."+sample_1+".csv"
-file_TCRD_2=args.dir_2+"/TCRD.cdr3.FREQ."+sample_2+".csv"
-
-file_TCRG_1=args.dir_1+"/TCRG.cdr3.FREQ."+sample_1+".csv"
-file_TCRG_2=args.dir_2+"/TCRG.cdr3.FREQ."+sample_2+".csv"
+file_TCRG_1=args.dir_1+"/TCRG.cdr3.FREQ."+".csv"
+file_TCRG_2=args.dir_2+"/TCRG.cdr3.FREQ."+".csv"
 
 
 dict_IGH_1=file2dict(file_IGH_1)
@@ -176,27 +177,27 @@ file.close()
 
 
 #VJ -----------------------------
+# also remove "+ sample_1" or "+ sample_2" from the following lines
+file_IGH_1=args.dir_1+"/IGH.VJ.FREQ."+".csv"
+file_IGH_2=args.dir_2+"/IGH.VJ.FREQ."+".csv"
 
-file_IGH_1=args.dir_1+"/IGH.VJ.FREQ."+sample_1+".csv"
-file_IGH_2=args.dir_2+"/IGH.VJ.FREQ."+sample_2+".csv"
+file_IGK_1=args.dir_1+"/IGK.VJ.FREQ."+".csv"
+file_IGK_2=args.dir_2+"/IGK.VJ.FREQ."+".csv"
 
-file_IGK_1=args.dir_1+"/IGK.VJ.FREQ."+sample_1+".csv"
-file_IGK_2=args.dir_2+"/IGK.VJ.FREQ."+sample_2+".csv"
+file_IGL_1=args.dir_1+"/IGL.VJ.FREQ."+".csv"
+file_IGL_2=args.dir_2+"/IGL.VJ.FREQ."+".csv"
 
-file_IGL_1=args.dir_1+"/IGL.VJ.FREQ."+sample_1+".csv"
-file_IGL_2=args.dir_2+"/IGL.VJ.FREQ."+sample_2+".csv"
+file_TCRA_1=args.dir_1+"/TCRA.VJ.FREQ."+".csv"
+file_TCRA_2=args.dir_2+"/TCRA.VJ.FREQ."+".csv"
 
-file_TCRA_1=args.dir_1+"/TCRA.VJ.FREQ."+sample_1+".csv"
-file_TCRA_2=args.dir_2+"/TCRA.VJ.FREQ."+sample_2+".csv"
+file_TCRB_1=args.dir_1+"/TCRB.VJ.FREQ."+".csv"
+file_TCRB_2=args.dir_2+"/TCRB.VJ.FREQ."+".csv"
 
-file_TCRB_1=args.dir_1+"/TCRB.VJ.FREQ."+sample_1+".csv"
-file_TCRB_2=args.dir_2+"/TCRB.VJ.FREQ."+sample_2+".csv"
+file_TCRD_1=args.dir_1+"/TCRD.VJ.FREQ."+".csv"
+file_TCRD_2=args.dir_2+"/TCRD.VJ.FREQ."+".csv"
 
-file_TCRD_1=args.dir_1+"/TCRD.VJ.FREQ."+sample_1+".csv"
-file_TCRD_2=args.dir_2+"/TCRD.VJ.FREQ."+sample_2+".csv"
-
-file_TCRG_1=args.dir_1+"/TCRG.VJ.FREQ."+sample_1+".csv"
-file_TCRG_2=args.dir_2+"/TCRG.VJ.FREQ."+sample_2+".csv"
+file_TCRG_1=args.dir_1+"/TCRG.VJ.FREQ."+".csv"
+file_TCRG_2=args.dir_2+"/TCRG.VJ.FREQ."+".csv"
 
 
 dict_IGH_1=file2dict(file_IGH_1)
