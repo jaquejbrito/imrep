@@ -66,12 +66,12 @@ def extract_unmapped(file):
 
 def extract_mapped(tag,file):
     samfile = pysam.AlignmentFile(args.reads_file, "rb")
-    
+
     if tag=="IGH":
-        
-       
-       
-    
+
+
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr14"
@@ -94,13 +94,13 @@ def extract_mapped(tag,file):
 
         k=0
         for read in samfile.fetch(chr,x,y):
-            
+
             rl=read.infer_query_length()
             c=read.cigartuples
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-		            
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -115,10 +115,10 @@ def extract_mapped(tag,file):
                 file.write("\n")
         return k
 
-			
+
     elif tag=="IGK":
-        
-        
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr2"
@@ -145,7 +145,7 @@ def extract_mapped(tag,file):
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-                    
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -161,9 +161,9 @@ def extract_mapped(tag,file):
         return k
 
     elif tag=="IGL":
-        
-        
-        
+
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr22"
@@ -195,7 +195,7 @@ def extract_mapped(tag,file):
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-                    
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -212,9 +212,9 @@ def extract_mapped(tag,file):
 
 
     elif tag=="TRA":
-        
-        
-        
+
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr14"
@@ -233,9 +233,9 @@ def extract_mapped(tag,file):
                 chr="14"
             x=52427967
             y=54224198
-    
-    
-    
+
+
+
 
         k=0
         for read in samfile.fetch(chr,x,y):
@@ -244,7 +244,7 @@ def extract_mapped(tag,file):
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-                    
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -260,8 +260,8 @@ def extract_mapped(tag,file):
         return k
 
     elif tag=="TRB":
-        
-        
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr7"
@@ -285,12 +285,12 @@ def extract_mapped(tag,file):
         for read in samfile.fetch(chr,x,y):
             rl=read.infer_query_length()
             c=read.cigartuples
-            
+
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-                    
-                    
+
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -307,8 +307,8 @@ def extract_mapped(tag,file):
 
 
     elif tag=="TRG":
-        
-        
+
+
         if  not args.species:
             if args.is_chrFormat2:
                 chr="chr7"
@@ -327,8 +327,8 @@ def extract_mapped(tag,file):
                 chr="3"
             x=19178042
             y=19356476
-    
-    
+
+
         k=0
         for read in samfile.fetch(chr,x,y):
             rl=read.infer_query_length()
@@ -336,7 +336,7 @@ def extract_mapped(tag,file):
             if c: # to avoid CIGAR of type None
                     type=read.cigartuples[0][0]
                     length=read.cigartuples[0][1]
-                    
+
                     if not (type==int(0) and length==rl): # if read is fully mapped for example 100M than we don't take it
                         k+=1
                         file.write(">"+str(read.query_name))
@@ -460,16 +460,16 @@ class ImReP(object):
 
 
     def __read_reads(self):
-        
-        
-        
+
+
+
         fastqfile = self.__settings.fastqfile
-        
-        
-        
+
+
+
         formatFile = "fasta"
-        
-        
+
+
         if self.__settings.isFastq:
             formatFile = "fastq"
         if fastqfile.endswith(".gz"):
@@ -521,12 +521,12 @@ class ImReP(object):
                     raise Exception("Are you sure the file %s is a .fastq file?" % fastqfile)
             else:
                 raise Exception("Unrecognized file format: %s!!!" % fastqfile)
-                    
-        # check here if the last record is not broken 
-        """                
-                        
-        
-        
+
+        # check here if the last record is not broken
+        """
+
+
+
 
 
 
@@ -534,9 +534,9 @@ class ImReP(object):
 
 
     def __full_cdr3(self):
-        
 
-        
+
+
         if not self._fastq_handle:
             return []
         vkeys = set(self.hashV.keys())
@@ -552,7 +552,7 @@ class ImReP(object):
                 count_existing = self.read_names[record.id]
                 record.id += "___%s" % count_existing
                 self.read_names[record.id] = count_existing + 1
-                
+
             self.debug_info[record.id] = {}
             pSequences = nucleotide2protein2(str(record.seq))
             if pSequences:
@@ -590,11 +590,11 @@ class ImReP(object):
                                     minlen1 = min(len(f), len(v))
                                     minlen2 = min(len(s), len(vv))
                                     if minlen1 > 0:
-                                        mismatch1 = jellyfish.levenshtein_distance(unicode(f[-minlen1:]), unicode(v[-minlen1:]))
+                                        mismatch1 = jellyfish.levenshtein_distance(str(f[-minlen1:]), str(v[-minlen1:]))
                                     else:
                                         mismatch1 = 0
                                     if minlen2 > 0:
-                                        mismatch2 = jellyfish.levenshtein_distance(unicode(s[:minlen2]), unicode(vv[:minlen2]))
+                                        mismatch2 = jellyfish.levenshtein_distance(str(s[:minlen2]), str(vv[:minlen2]))
                                     else:
                                         mismatch2 = 0
                                     if (minlen1 <= 3 and mismatch2 <= 1) or (minlen1 >= self.__settings.minlen1 and mismatch1 <= self.__settings.mismatch1 and minlen2 >= self.__settings.minlen2 and mismatch2 <= self.__settings.mismatch2):
@@ -627,11 +627,11 @@ class ImReP(object):
                                     minlen1 = min(len(f), len(v))
                                     minlen2 = min(len(s), len(vv))
                                     if minlen1 > 0:
-                                        mismatch1 = jellyfish.levenshtein_distance(unicode(f[-minlen1:]), unicode(v[-minlen1:]))
+                                        mismatch1 = jellyfish.levenshtein_distance(str(f[-minlen1:]), str(v[-minlen1:]))
                                     else:
                                         mismatch1 = 0
                                     if minlen2 > 0:
-                                        mismatch2 = jellyfish.levenshtein_distance(unicode(s[:minlen2]), unicode(vv[:minlen2]))
+                                        mismatch2 = jellyfish.levenshtein_distance(str(s[:minlen2]), str(vv[:minlen2]))
                                     else:
                                         mismatch2 = 0
                                     if (minlen1 <= 3 and mismatch2 <= 1) or (minlen1 >= self.__settings.minlen1 and mismatch1 <= self.__settings.mismatch1 and minlen2 >= self.__settings.minlen2 and mismatch2 <= self.__settings.mismatch2):
@@ -670,11 +670,11 @@ class ImReP(object):
                                         minlen1 = min(len(f), len(j))
                                         minlen2 = min(len(s), len(jj))
                                         if minlen2 > 0:
-                                            mismatch2 = jellyfish.levenshtein_distance(unicode(s[:minlen2]), unicode(jj[:minlen2]))
+                                            mismatch2 = jellyfish.levenshtein_distance(str(s[:minlen2]), str(jj[:minlen2]))
                                         else:
                                             mismatch2 = 0
                                         if minlen1 > 0:
-                                            mismatch1 = jellyfish.levenshtein_distance(unicode(f[-minlen1:]), unicode(j[-minlen1:]))
+                                            mismatch1 = jellyfish.levenshtein_distance(str(f[-minlen1:]), str(j[-minlen1:]))
                                         else:
                                             mismatch1 = 0
                                         if (minlen2 <= 3 and mismatch1 <= 1) or (minlen2 >= self.__settings.minlen1 and mismatch2 <= self.__settings.mismatch1 and minlen1 >= self.__settings.minlen2 and mismatch1 <= self.__settings.mismatch2):
@@ -709,11 +709,11 @@ class ImReP(object):
                                     minlen1 = min(len(f), len(j))
                                     minlen2 = min(len(s), len(jj))
                                     if minlen2 > 0:
-                                        mismatch2 = jellyfish.levenshtein_distance(unicode(s[:minlen2]), unicode(jj[:minlen2]))
+                                        mismatch2 = jellyfish.levenshtein_distance(str(s[:minlen2]), str(jj[:minlen2]))
                                     else:
                                         mismatch2 = 0
                                     if minlen1 > 0:
-                                        mismatch1 = jellyfish.levenshtein_distance(unicode(f[-minlen1:]), unicode(j[-minlen1:]))
+                                        mismatch1 = jellyfish.levenshtein_distance(str(f[-minlen1:]), str(j[-minlen1:]))
                                     else:
                                         mismatch1 = 0
                                     if (minlen2 <= 3 and mismatch1 <= 1) or (minlen2 >= self.__settings.minlen1 and mismatch2 <= self.__settings.mismatch1 and minlen1 >= self.__settings.minlen2 and mismatch1 <= self.__settings.mismatch2):
@@ -883,9 +883,13 @@ class ImReP(object):
                 clones[x[:-1]] = y
         # here we have to cluster each chain type separately
         clones_by_type = {}
+
         for cdr3, count in clones.items():
-            chtypes = map(lambda xx: (xx[0], len(xx[1])), self.pSeq_read_map[cdr3]["chain_type"].items())
-            chtype = [xx for xx, yy in chtypes if yy == max(chtypes, key=lambda zz: zz[1])[1]][0]
+            
+            chtypes = list(map(lambda xx: (xx[0], len(xx[1])), self.pSeq_read_map[cdr3]["chain_type"].items()))
+            max_count = max([y for (x, y) in chtypes])
+            chtype = [xx for (xx, yy) in chtypes if yy == max_count][0]
+
             if chtype not in clones_by_type:
                 clones_by_type[chtype] = {}
             clones_by_type[chtype][cdr3] = count
@@ -935,15 +939,15 @@ if __name__ == "__main__":
     optional_arguments.add_argument("--fastq", help="a binary flag used to indicate that the input file with unmapped reads is in fastq format", dest="isFastq", action="store_true")
     optional_arguments.add_argument("--bam", help="a binary flag used to indicate that the input file is a BAM file mapped and  unmapped reads", dest="isBAM", action="store_true")
     optional_arguments.add_argument("--chrFormat2", help="a binary flag used to indicate that the format of chromosome name in the bam file is in this format : chr1, chr2,..,chrX. This options is only compatible with --bam option. By default we asssume chromosmes names are indicated only by numbers :1,2,3,...,X", dest="is_chrFormat2", action="store_true")
-    
-    
+
+
     optional_arguments.add_argument("--hg38", help="a binary flag used to indicate that reads were mapped to hg38 rellease. The default is hg19. For mouse we support only mm10 (default). ", dest="is_hg38", action="store_true")
     optional_arguments.add_argument("-a", "--allReads", help="Original raw reads (all reads). Needs to be used with --digGold option", type=str, dest="allReads")
 
 
     optional_arguments.add_argument("--digGold", help="a binary flag used to indicate that the input file is FASTQ file with original raw reads (all reads). And unmapped reads needs to be extracted from the raw reads ( original raw reads are provided using --reads_file option). Use this option only if unmapped reads were not saved. Needs to be used with -m option", dest="is_digGold", action="store_true")
 
-    
+
     optional_arguments.add_argument("-s", "--species", help="species (human or mouse, default human)", type=str, dest="species")
     optional_arguments.add_argument("-o", "--overlapLen", help="the minimal length to consider between reads overlapping with a V gene and reads overlapping with a J gene. Default value is 5 amino acids.", type=int)
     optional_arguments.add_argument("--noOverlapStep", help="a binary flag used in case if the user does not want to run the second stage of the ImReP assembly.", dest="noOverlapStep", action="store_true")
@@ -957,19 +961,19 @@ if __name__ == "__main__":
     advanced_arguments.add_argument("--minOverlap2", help="minimal overlap between the reads and A) the right part of V gene (after C amino acid) and B) the left part of J gene (before W for IGH and F for all other chains), default is 1", type=int)
     advanced_arguments.add_argument("--misMatch1", help="maximal number of mismatches between the reads and A) the left part of V gene (before C amino acid) and B) the right part of J gene (after W for IGH and F for all other chains), default is 2", type=int)
     advanced_arguments.add_argument("--misMatch2", help="maximal number of mismatches between the reads and A) the right part of V gene (after C amino acid) and B) the left part of J gene (before W for IGH and F for all other chains), default is 2", type=int)
-   
-   
+
+
 
 
     args = ap.parse_args()
-    
-    
+
+
     #Check compatibility of options
     if args.is_hg38 and args.species=="mouse":
         print ("::::::ERROR. Options --hg38 and -s mouse are not compatible. Please keep only one of those options.")
         print ("Exit!")
         sys.exit(1)
-    
+
     if args.isBAM and args.is_digGold:
         print ("::::::ERROR. Options --bam and --digGold are not compatible. Please keep only one of those options.")
         sys.exit(1)
@@ -978,7 +982,7 @@ if __name__ == "__main__":
 
     sampleName = os.path.splitext(os.path.basename(args.reads_file))[0]
     outFile = args.output_clones
-    
+
 
     outDir = os.path.dirname(outFile)
     if outDir == "":
@@ -994,7 +998,7 @@ if __name__ == "__main__":
         dict["chains"]=args.chains.split(",")
 
     #added by Serghei Mangul - 08/06/17
-    
+
     if args.isBAM:
         print ("Parse bam file with mapped and unmapped reads")
 
@@ -1021,8 +1025,8 @@ if __name__ == "__main__":
             k=0
             extract_mapped(i,file,k)
             print ("Number of reads extacted from ", i, "locus : ",k)
-        
-        
+
+
         samfile = pysam.AlignmentFile(args.reads_file, "rb")
         print  ("Parse bam file with mapped reads")
         mReads=set()
@@ -1034,7 +1038,7 @@ if __name__ == "__main__":
         fastqfile=fileNewInput
     else:
         fastqfile = args.reads_file
-    
+
 
     isFastq = args.isFastq
 
@@ -1261,5 +1265,3 @@ if __name__ == "__main__":
         clones.append(x % y)
     dumpClones2(clones, outFile)
     print ("Done. Bye-bye")
-
-

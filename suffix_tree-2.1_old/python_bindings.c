@@ -177,7 +177,7 @@ static PyMethodDef _suffix_tree_methods[] = {
 };
 
 
-static struct PyModuleDef _suffix_tree_definition = {
+static struct PyModuleDef SuffixTree_definition = {
     PyModuleDef_HEAD_INIT,
     "_suffix_tree",
     "Wrapper module for suffix trees.",
@@ -190,18 +190,18 @@ static struct PyModuleDef _suffix_tree_definition = {
 #endif
 
 PyMODINIT_FUNC
-PyInit__suffix_tree(void)
+init_suffix_tree(void)
 {
-    //Py_Initialize();
     if (PyType_Ready(&SuffixTreeType) < 0) return 0;
     if (PyType_Ready(&NodeType) < 0) return 0;
 
     Py_INCREF(&SuffixTreeType);
     Py_INCREF(&NodeType);
 
-    PyObject* m = PyModule_Create(&_suffix_tree_definition);
+    PyObject* m = PyModule_Create(&SuffixTree_definition);
     PyModule_AddObject(m, "SuffixTree", (PyObject *)&SuffixTreeType);
-    return m;
+
+    return 0;
 }
 
 

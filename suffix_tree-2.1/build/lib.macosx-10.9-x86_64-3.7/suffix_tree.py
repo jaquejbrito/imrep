@@ -186,7 +186,7 @@ def simple_test():
         print('leaf:', '"'+l.pathLabel+'"', ':', '"'+l.edgeLabel+'"')
 
     for n in st.innerNodes:
-        print('inner:', '"'+n.edgeLabel+'"')
+        print('inner:', '"'+n.edgeLabel)
     print('done.\n\n')
 
     del st
