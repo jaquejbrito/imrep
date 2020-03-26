@@ -885,16 +885,16 @@ class ImReP(object):
         clones_by_type = {}
 
         for cdr3, count in clones.items():
-            
-            chtypes = list(map(lambda xx: (xx[0], len(xx[1])), self.pSeq_read_map[cdr3]["chain_type"].items()))
-            max_count = max([y for (x, y) in chtypes])
-            chtype = [xx for (xx, yy) in chtypes if yy == max_count][0]
 
+            chtypes = list(map(lambda xx: (xx[0], len(xx[1])), self.pSeq_read_map[cdr3]["chain_type"].items()))
+            chtype = [xx for xx, yy in chtypes if yy == max(chtypes, key=lambda zz: zz[1])[1]][0]
             if chtype not in clones_by_type:
                 clones_by_type[chtype] = {}
             clones_by_type[chtype][cdr3] = count
         clustered_clones = []
         for chtype, clones in clones_by_type.items():
+            clustered = []
+            #CHECKED
             if self.__settings.noCast:
                 clustered = []
                 for clone, count in clones.items():
@@ -902,27 +902,39 @@ class ImReP(object):
             else: # execute CAST clustering
                 cast_clustering = Cast(clones)
                 clustered = cast_clustering.doCast(self.__settings.castThreshold[chtype])
+
             clustered = [cclone for cclone in clustered if cclone[1] > self.__settings.filterThreshold] # filter out garbage
             for cl in clustered:
                 cl.append(chtype)
             self.clonotype_CDR3_count_dict[chtype] = len(clustered)
             clustered_clones.extend(clustered)
+        #JA TEM POBREMA
+
         self.clone_dict = {}
         for clone in clustered_clones:
-            self.clone_dict[clone[0]] = clone[2]
+            self.clone_dict[clone[0]] = list(clone[2])
             chain_type = clone[3]
             del clone[2]
             del clone[1] # remove counts for now
             j_types = None
             if chain_type in ["IGH", "TRB", "TRD"]:
                 j_types = self.__map_d(clone[0], chain_type)
-            types = [",".join(list(set(self.pSeq_read_map[clone[0]]["v"]))[:3])]
+                j_types = sorted(j_types)
+            j = list(self.pSeq_read_map[clone[0]]["v"])
+            j.sort()
+            js = sorted(set(j))
+            types = [",".join(js[:3])]
+
             if j_types:
                 types.append(",".join(j_types))
             else:
                 types.append("NA")
-            types.append(",".join(list(set(self.pSeq_read_map[clone[0]]["j"]))[:3]))
+            j = list(self.pSeq_read_map[clone[0]]["j"])
+            j.sort()
+            js = sorted(set(j))
+            types.append(",".join(js)[:3])
             clone.extend(types)
+
         return clustered_clones
 
 
@@ -1099,7 +1111,6 @@ if __name__ == "__main__":
     print (info.info.get("hello"))
     imrep = ImReP(settings)
     clones = imrep.doComputeClones()
-
 
 
     final_clones = []

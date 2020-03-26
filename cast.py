@@ -4,8 +4,10 @@
 from numpy import mean
 import networkx as nx
 from jellyfish import levenshtein_distance as edit_distance
+import sys
 
-
+if sys.version_info.major == 2:
+    str = unicode
 
 
 class Cast(object):
@@ -18,7 +20,7 @@ class Cast(object):
 
         self._dist_dict = {}
         keys = list(raw_cdr3_dict.keys())
-
+        keys.sort()
         for i in range(len(keys)):
             for j in range(i, len(keys)):
                 x, u = keys[i], keys[j]
@@ -64,7 +66,7 @@ class Cast(object):
 
     def __cast(self, nodes, threshold):
         partition = []
-        while nodes:
+        while sorted(nodes):
             degrees = [(node, self.graph.degree(node)) for node in self.graph.nodes()]
             max_deg_vert = max(degrees, key=lambda z: z[1])[0]
             cluster = set([max_deg_vert])
@@ -93,10 +95,17 @@ class Cast(object):
         nodes = set(self.graph.nodes())
         partition = self.__cast(nodes, threshold)
         cdr3s = []
+        for i in range(1,len(partition)):
+            j = partition[i]
+            j.sort()
+            partition[i] = j
+        partition.sort()
         for part in partition:
+            part.sort()
             representative = max(part, key=lambda z: z[1])[0]
             count_cluster = sum([x[1] for x in part])
             members = map(lambda x: x[0], part)
+            #print(representative,count_cluster,list(members))
             cdr3s.append([representative, count_cluster, members])
         return cdr3s
 
