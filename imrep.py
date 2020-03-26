@@ -5,7 +5,10 @@ import os
 from collections import Counter
 import gzip
 import pysam
+import sys
 
+if sys.version_info.major == 2:
+    str = unicode
 
 try:
     from StringIO import StringIO # Python 2
@@ -919,20 +922,12 @@ class ImReP(object):
             j_types = None
             if chain_type in ["IGH", "TRB", "TRD"]:
                 j_types = self.__map_d(clone[0], chain_type)
-                j_types = sorted(j_types)
-            j = list(self.pSeq_read_map[clone[0]]["v"])
-            j.sort()
-            js = sorted(set(j))
-            types = [",".join(js[:3])]
-
+            types = [",".join(list(set(self.pSeq_read_map[clone[0]]["v"]))[:3])]
             if j_types:
                 types.append(",".join(j_types))
             else:
                 types.append("NA")
-            j = list(self.pSeq_read_map[clone[0]]["j"])
-            j.sort()
-            js = sorted(set(j))
-            types.append(",".join(js)[:3])
+            types.append(",".join(list(set(self.pSeq_read_map[clone[0]]["j"]))[:3]))
             clone.extend(types)
 
         return clustered_clones
